@@ -19,12 +19,13 @@ pipeline {
 
      stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'target/*.war, fingerprint:true
+                archiveArtifacts artifacts: 'target/*.war', fingerprint:true
             }
         }
         stage('Deploy') {
             steps {
                 sh 'mvn clean package'  
+                ansiblePlaybook playbook:'ansible/playbook.yml', inventory:'ansible/hosts.ini'
             }
         }
 
