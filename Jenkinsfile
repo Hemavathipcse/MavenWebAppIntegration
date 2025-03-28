@@ -1,5 +1,10 @@
 pipeline {
     agent any  // Use any available agent
+    
+    environment {
+        LANG = 'en_US.UTF-8'
+        LC_ALL = 'en_US.UTF-8'
+    }
 
     tools {
         maven 'Maven'  // Ensure this matches the name configured in Jenkins
@@ -27,11 +32,12 @@ pipeline {
                sh 'mvn clean package'  
                // ansiblePlaybook playbook:'ansible/playbook.yml', inventory:'ansible/hosts.ini'
               // ansible-playbook ansible/playbook.yml -i ansible/hosts.ini
-              ansiblePlaybook(
-                        playbook: 'playbook.yml',
-                        inventory: 'hosts.ini',
-                        become: true
-                    )
+              //ansiblePlaybook(
+                       // playbook: 'playbook.yml',
+                       // inventory: 'hosts.ini',
+                       // become: true
+                   // )
+                    sh 'ansible-playbook playbook.yml -i hosts.ini -b --become-user root'
             }
         }
 
