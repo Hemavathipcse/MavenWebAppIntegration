@@ -24,9 +24,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-               // sh 'mvn clean package'  
+               sh 'mvn clean package'  
                // ansiblePlaybook playbook:'ansible/playbook.yml', inventory:'ansible/hosts.ini'
-               ansible-playbook ansible/playbook.yml -i ansible/hosts.ini
+              // ansible-playbook ansible/playbook.yml -i ansible/hosts.ini
+              ansiblePlaybook(
+                        playbook: 'playbook.yml',
+                        inventory: 'hosts.ini',
+                        become: true
+                    )
             }
         }
 
