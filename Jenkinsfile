@@ -37,7 +37,8 @@ pipeline {
                        // inventory: 'hosts.ini',
                        // become: true
                    // )
-                    sh 'ansible-playbook ansible/playbook.yml -i ansible/hosts.ini -b --become-user root'
+                   // sh 'ansible-playbook ansible/playbook.yml -i ansible/hosts.ini -b --become-user root'
+                   sh 'ansible-playbook ansible/playbook.yml -i ansible/hosts.ini'
             }
         }
 
